@@ -2,7 +2,7 @@ group 'org.sigrok.flutter_libserialport'
 version '0.5.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '2.0.0'
+    ext.kotlin_version = '1.8.22' // or '1.9.10' for AGP 8+
     repositories {
         google()
         jcenter()
@@ -25,15 +25,16 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    namespace 'org.sigrok.flutter_libserialport'
-    compileSdk 34
+    compileSdkVersion 33
 
+    namespace 'com.jpnurmi.flutter_libserialport'  // ✅ This is required for AGP 8+
+
+    defaultConfig {
+        minSdkVersion 21
+        namespace 'org.sigrok.flutter_libserialport'
+    }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
-    }
-    defaultConfig {
-        minSdkVersion 16
-        namespace 'org.sigrok.flutter_libserialport'
     }
     lintOptions {
         disable 'InvalidPackage'
